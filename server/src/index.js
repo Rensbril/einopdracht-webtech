@@ -14,8 +14,7 @@ app.get("/", (req, res) => {
   ``;
 });
 
-app.use("/api/products", require("./routes/products.js"));
-app.use("api/auctions", require("./routes/auctions.js"));
+app.use("/api/auctions", require("./routes/auctions.js"));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

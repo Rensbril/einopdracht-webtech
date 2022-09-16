@@ -27,11 +27,13 @@ router.post("/", (req, res) => {
     id: nextID,
     name: req.body.name,
     description: req.body.description,
-    price: req.body.price,
+    startingprice: req.body.startingprice,
+    highestBidding: req.body.startingprice,
   };
 
   nextID++;
   auctions.push(auction);
+  console.log(auction);
   res.json(auction);
 });
 
@@ -54,7 +56,7 @@ function validateAuction(auction) {
 
     description: Joi.string().max(200).required(),
 
-    price: Joi.number().integer().max(10000).required(),
+    startingprice: Joi.number().integer().max(10000).required(),
   });
   return Joi.validate(auction, schema);
 }
@@ -68,12 +70,14 @@ let auctions = [
     id: 1,
     name: "Auction 1",
     description: "Auction 1",
+    startingprice: 30,
     highestBidding: 100,
   },
   {
     id: 2,
     name: "Auction 2",
     description: "Auction 2",
+    startingprice: 50,
     highestBidding: 100,
   },
 ];

@@ -5,16 +5,14 @@ const port = process.env.port || 8080;
 const auth = require("./routes/auth");
 
 app.use(express.json());
+app.use(express.static("public"));
+
 app.use("/auth", auth);
+app.use("/api/auctions", require("./routes/auctions.js"));
 
 app.get("/", (req, res) => {
-  console.log(req);
-  // res.send('Hello World!')
-  res.json({ msg: "hello world" });
-  ``;
+  res.send("Welcome!");
 });
-
-app.use("/api/auctions", require("./routes/auctions.js"));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

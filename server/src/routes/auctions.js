@@ -21,7 +21,12 @@ router.post("/", (req, res) => {
     res.status(400).send(error.details[0].message);
     return;
   }
-
+  if (auctions.find((a) => a.name === req.body.name)) {
+    res
+      .status(404)
+      .send("Auction with name '" + req.body.name + "' already exists");
+    return;
+  }
   //push schema to products storage
   const auction = {
     id: nextID,
@@ -35,6 +40,7 @@ router.post("/", (req, res) => {
   auctions.push(auction);
   console.log(auction);
   res.json(auction);
+  res.sendStatus(201, "Auction successfully added");
 });
 
 //put
@@ -61,8 +67,6 @@ function validateAuction(auction) {
   return Joi.validate(auction, schema);
 }
 
-module.exports = router;
-
 //storage temporary
 let nextID = 3;
 let auctions = [
@@ -81,3 +85,5 @@ let auctions = [
     highestBidding: 100,
   },
 ];
+
+module.exports = router;

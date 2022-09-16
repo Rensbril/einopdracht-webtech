@@ -1,9 +1,9 @@
-import { Router } from "express";
-// import Joi from "joi";
-const router = Router();
+const express = require("express");
+const Joi = require("joi");
+const router = express.Router();
 
 router.get("/", function (req, res) {
   //get
 });
 
-export default router;
+module.exports = router;

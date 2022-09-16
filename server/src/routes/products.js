@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { object, string, number, validate } from "joi";
-const router = Router();
+const express = require("express");
+const Joi = require("joi");
+const router = express.Router();
 
 //get all
 router.get("/", function (req, res) {
@@ -48,15 +48,17 @@ router.delete("/:id", (req, res) => {});
 
 // request validation
 function validateProduct(product) {
-  const schema = object({
-    name: string().alphanum().min(3).max(50).required(),
+  const schema = Joi.object({
+    name: Joi.string().alphanum().min(3).max(50).required(),
 
-    description: string().max(200).required(),
+    description: Joi.string().max(200).required(),
 
-    price: number().integer().max(10000).required(),
+    price: Joi.number().integer().max(10000).required(),
   });
-  return validate(course, schema);
+  return Joi.validate(course, schema);
 }
+
+module.exports = router;
 
 //storage temporary
 let products = [
@@ -73,5 +75,3 @@ let products = [
     price: "20",
   },
 ];
-
-export default router;

@@ -1,12 +1,12 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
 
 router.post("/", async (req, res) => {
-    // @todo check the credentials and return an appropriate response
-    // For testing purposes a dummy token is returned.
-    res.json({
-        "token": "dummyt0k3nv4lu3!"
-    })
+  // @todo check the credentials and return an appropriate response
+  // For testing purposes a dummy token is returned.
+  res.json({
+    token: "dummyt0k3nv4lu3!",
+  });
 });
 
-module.exports = router;
+export default router;
